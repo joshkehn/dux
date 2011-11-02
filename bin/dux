@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+var Logger = require('../lib/dux/logger'),
+    dux_cli = require('../lib/dux/cli'),
+    err, dux, log;
+
+// Handle debug flag externally
+if (dux_cli.argv.debug) {
+    log.info('Debugging ' + 'enabled'.green);
+    Logger.debug();
+}
+log = Logger.Logger();
+
+dux = require('../lib/dux');
+
+log.silly('Defining exit function.');
+function exit (code, status) {
+    process.removeListener('exit', exit);
+
+    // Exiting with code / status
+    code = code || 0;
+    if (err || (code !== 0 && code !== -1)) {
+        // Error or nonzero code present
+        log.info('Dux'.grey + ' not ok'.red.bold);
+        process.exit(1);
+    } else if (code !== -1) {
+        log.silly('Everything looks good.');
+        log.info('Dux'.grey + ' ok'.green);
+        process.exit(0);
+    }
+};
+
+log.silly('Attaching exit listener.');
+process.on('exit', exit);
+
+log.silly('Starting dux with ', dux_cli.argv);
+
+dux.start(dux_cli.argv, function start (error) {
+    log.silly('Found error? ' + (error ? 'yes'.red : 'nope'.green));
+    err = error;
+
+    process.stdout.on('drain', function drain () {
+        log.silly('stdout drained, exiting.');
+        process.exit(err ? 1 : 0);
+    });
+
+    log.silly('Dux finished.');
+});

@@ -1,0 +1,19 @@
+{
+    "author" : "Joshua Kehn <josh@kehn.io>",
+    "name" : "dux",
+    "version" : "0.1.0",
+    "main" : "./lib/dux",
+    "bin" : {
+        "dux" : "./bin/dux"
+    },
+    "engines" : {
+        "node" : ">=0.4.7"
+    },
+    "dependencies" : {
+        "colors" : "latest",
+        "winston" : ">=0.3.x",
+        "optimist" : ">=0.2.x",
+        "pkginfo" : "latest",
+        "forever" : "latest"
+    }
+}
