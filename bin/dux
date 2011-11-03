@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var Logger = require('../lib/dux/logger'),
     dux_cli = require('../lib/dux/cli'),
-    err, dux, log;
+    err, dux, log = Logger.Logger();
 
 // Handle debug flag externally
 if (dux_cli.argv.debug) {
