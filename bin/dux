@@ -7,8 +7,10 @@ var Logger = require('../lib/dux/logger'),
 if (dux_cli.argv.debug) {
     log.info('Debugging ' + 'enabled'.green);
     Logger.debug();
+
+    // Grab our new logger
+    log = Logger.Logger();
 }
-log = Logger.Logger();
 
 dux = require('../lib/dux');
 
@@ -34,6 +36,7 @@ process.on('exit', exit);
 
 log.silly('Starting dux with ', dux_cli.argv);
 
+// Start dux.
 dux.start(dux_cli.argv, function start (error) {
     log.silly('Found error? ' + (error ? 'yes'.red : 'nope'.green));
     err = error;
@@ -43,5 +46,6 @@ dux.start(dux_cli.argv, function start (error) {
         process.exit(err ? 1 : 0);
     });
 
+    // Dux is finished.
     log.silly('Dux finished.');
 });
