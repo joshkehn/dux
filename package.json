@@ -1,7 +1,7 @@
 {
     "author" : "Joshua Kehn <josh@kehn.io>",
     "name" : "dux",
-    "version" : "0.4.0",
+    "version" : "0.4.1",
     "main" : "./lib/dux",
     "bin" : {
         "dux" : "./bin/dux"
