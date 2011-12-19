@@ -1,39 +1,25 @@
 var dux = require('../lib/dux');
 
 dux.config({
-    'name' : {
-        default : '[no name]'.red
-    },
     'debug' : {
-        alias : 'd',
-        boolean : true,
-        default : false
-    },
-    'short' : {
         boolean : true,
         default : false
     }
 });
 
+// Check the deubgging flag
 if (dux.options.debug) {
     dux.logger.info('Debugging ' + 'enabled'.green);
     dux.logger.set_levels('all');
 }
-dux.logger.short(dux.options.short);
 
-dux.default('hello');
+// Override the default command, setting it to `'hw'` instead of `'help'`.
+dux.default('hw');
 
-dux.commands.add('hello', function () {
-    dux.logger.info('Hello ' + dux.options.name.green);
+// Add the `hello` command.
+dux.commands.add('hw', function () {
+    dux.logger.info('Hello, world!');
 });
 
-dux.commands.add('goodbye', function () {
-    dux.logger.info('Goodbye ' + dux.options.name.green);
-});
-
-dux.commands.add('hellogoodbye', function () {
-    dux.commands.run('hello');
-    dux.commands.run('goodbye');
-});
-
+// Start dux.
 dux.start();
