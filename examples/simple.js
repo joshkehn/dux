@@ -13,7 +13,7 @@ dux.config({
 
 if (dux.options.debug) {
     dux.logger.info('Debugging ' + 'enabled'.green);
-    dux.logger.debug();
+    dux.logger.set_levels('all');
 }
 
 

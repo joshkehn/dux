@@ -5,9 +5,8 @@ var log = require('../lib/dux/logger'),
 
 // Handle debug flag externally
 if (dux_cli.argv.debug) {
-    log.info('Debugging ' + 'enabled'.green);
     log.set_levels('all');
-    log.short();
+    log.info('Debugging ' + 'enabled'.green);
 }
 
 dux = require('../lib/dux');
