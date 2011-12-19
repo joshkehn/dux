@@ -1,15 +1,13 @@
 #!/usr/bin/env node
-var Logger = require('../lib/dux/logger'),
+var log = require('../lib/dux/logger'),
     dux_cli = require('../lib/dux/cli'),
-    dux, log = Logger.Logger();
+    dux;
 
 // Handle debug flag externally
 if (dux_cli.argv.debug) {
     log.info('Debugging ' + 'enabled'.green);
-    Logger.debug();
-
-    // Grab our new logger
-    log = Logger.Logger();
+    log.set_levels('all');
+    log.short();
 }
 
 dux = require('../lib/dux');
