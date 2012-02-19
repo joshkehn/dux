@@ -10,58 +10,70 @@ There is a simple example located at `examples/simple.js`.
 
 First pass in any configurable options into dux. Valid optimist config objects will work.
 
-    dux.config({
-        'debug' : {
-            boolean : true,
-            default : false
-        }
-    });
+~~~ js
+dux.config({
+    'debug' : {
+        boolean : true,
+        default : false
+    }
+});
+~~~
 
 Next we check that debug flag to see if it's been tripped. In future versions of dux, the debug flag will be a self-contained option. For now it's exposed for you to handle manually.
 
-    // Check the debugging flag
-    if (dux.options.debug) {
-        dux.logger.info('Debugging ' + 'enabled'.green);
-        dux.logger.set_levels('all');
-    }
+~~~ js
+// Check the debugging flag
+if (dux.options.debug) {
+    dux.logger.info('Debugging ' + 'enabled'.green);
+    dux.logger.set_levels('all');
+}
+~~~
 
 Now we add a simple command and set that as the default command to execute, given no other options.
 
-    // Override the default command, setting it to `'hw'` instead of `'help'`.
-    dux.default('hw');
+~~~ js
+// Override the default command, setting it to `'hw'` instead of `'help'`.
+dux.default('hw');
 
-    // Add the `hello` command.
-    dux.commands.add('hw', function () {
-        dux.logger.info('Hello, world!');
-    });
+// Add the `hello` command.
+dux.commands.add('hw', function () {
+    dux.logger.info('Hello, world!');
+});
+~~~
 
 In the case that you do not default a command, `help` is chosen as the default one. Should an application not provide a help, dux will output it's own help. Dux will provide a command list helper (`dux.help()`) that you can attach to output all attached commands.
 
-    // Attach the `dux.help`
-    dux.commands.add('help', dux.help);
-    // Now calling `script.js help` will execute `dux.help`
-    // and output a list of attached commands.
+~~~ js
+// Attach the `dux.help`
+dux.commands.add('help', dux.help);
+// Now calling `script.js help` will execute `dux.help`
+// and output a list of attached commands.
+~~~
 
 After all the commands are added, tell dux to start running.
 
-    // Start dux.
-    dux.start();
+~~~ js
+// Start dux.
+dux.start();
+~~~
 
 `dux.start` can take an optional callback function. If provided control passes to that once all the commands are run. You can do pre and post work in this fashion.
 
-    function pre_dux (cont) {
-        // do some work
-        cont();
-    }
+~~~ js
+function pre_dux (cont) {
+    // do some work
+    cont();
+}
 
-    function post_dux (err) {
-        // Finish some work
-        process.exit(err ? 1 : 0);
-    }
+function post_dux (err) {
+    // Finish some work
+    process.exit(err ? 1 : 0);
+}
 
-    pre_dux(function () {
-        dux.start(post_dux);
-    });
+pre_dux(function () {
+    dux.start(post_dux);
+});
+~~~
 
 ## License
 
