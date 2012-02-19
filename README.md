@@ -19,7 +19,7 @@ First pass in any configurable options into dux. Valid optimist config objects w
 
 Next we check that debug flag to see if it's been tripped. In future versions of dux, the debug flag will be a self-contained option. For now it's exposed for you to handle manually.
 
-    // Check the deubgging flag
+    // Check the debugging flag
     if (dux.options.debug) {
         dux.logger.info('Debugging ' + 'enabled'.green);
         dux.logger.set_levels('all');
